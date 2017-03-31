@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="node_modules/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="vm">
+        <div v-if="Math.random() > 0.5">
+            Now you see me
+        </div>
+        <div v-else>
+            Now you don't
+        </div>
+    </div>
+    <div id="vm1">
+        <div v-if="type === 'A'">
+            A
+        </div>
+        <div v-else-if="type === 'B'">
+            B
+        </div>
+        <div v-else-if="type === 'C'">
+            C
+        </div>
+        <div v-else>
+            Not A/B/C
+        </div>
+    </div>
+
+    <div id="vm2" v-show="ok">Hello!</div>
+    <script>
+        var vm = new Vue({
+            el: '#vm'
+        })
+        var vm1 = new Vue({
+            el: '#vm1',
+            data: {
+                type: 'A'
+            }
+        })
+        var vm2 = new Vue({
+            el: '#vm2',
+            data: {
+                ok: true
+            }
+        })
+    </script>
+</body>
+
+</html>

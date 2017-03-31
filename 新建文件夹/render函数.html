@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <anchored-heading :level="1">Hello world!</anchored-heading>
+    <script type="text/x-template" id="anchored-heading-template">
+        <div>
+            <h1 v-if="level === 1">
+                <slot></slot>
+            </h1>
+            <h1 v-if="level === 2">
+                <slot></slot>
+            </h1>
+            <h1 v-if="level === 3">
+                <slot></slot>
+            </h1>
+            <h1 v-if="level === 4">
+                <slot></slot>
+            </h1>
+            <h1 v-if="level === 5">
+                <slot></slot>
+            </h1>
+            <h1 v-if="level === 6">
+                <slot></slot>
+            </h1>
+        </div>
+    </script>
+    <script>
+        Vue.component('anchored-heading',{
+            template: '#anchored-heading-template',
+            props: {
+                level: {
+                    type: Number,
+                    required: true
+                }
+            }
+        })
+    </script>
+</body>
+</html>

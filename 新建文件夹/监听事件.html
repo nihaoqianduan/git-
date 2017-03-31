@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="example-1">
+        <button v-on:click="counter += 1">增加1</button>
+        <p>这个按钮被点击了{{counter}}次。</p>
+    </div>
+
+    <!--很多时间处理的逻辑都很复杂，所以直接把JavaScript代码写在v-on指令中是不可行的。因此v-on可以接收一个定义的方法来调用。-->
+    <div id="example-2">
+        <!-- greet 是在下面定义的方法名-->
+        <button v-on:click="greet">Greet</button>
+    </div>
+
+    <!-- 内联处理器方法 -->
+    <div id="example-3">
+        <button v-on:click="say('hi')">Say hi</button>
+        <button v-on:click="say('what')">Say what</button>
+    </div>
+    <script>
+        var example1 = new Vue({
+            el: '#example-1',
+            data: {
+                counter: 0
+            }
+        })
+
+        var example2 = new Vue({
+            el: '#example-2',
+            data: {
+                name: 'Vue.js'
+            },
+            // 在 methods 对象中定义方法
+            methods: {
+                greet: function(event){
+                    console.log(event)
+                    console.log(this)
+                    // this 在方法里只当前 Vue 实例
+                    console.log('Hello' + this.name + '!')
+                    // event 是原生的 DOM 事件
+                    console.log(event.target.tagName)
+                }
+            }
+        })
+
+        var example3 = new Vue({
+            el: '#example-3',
+            methods: {
+                say: function(message){
+                    console.log(message)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

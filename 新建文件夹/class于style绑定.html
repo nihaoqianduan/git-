@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="node_modules/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <!--绑定class-->
+    <div class="static" v-bind:class="classObject"></div>
+
+    <div id="vm" v-bind:class="classObject"></div>
+
+    <div id="vm2" v-bind:class="[activeClass, errorClass]"></div>
+
+    <div id="vm3">
+        <my-component class="boo" v-bind:class="{active: isActive}"></my-component>
+    </div>
+
+    <!--绑定style-->
+    <div id="vm4" v-bind:style="{color: activeColor,fontSize: fontSize + 'px'}">{{text}}</div>
+    <div id="vm5" v-bind:style="styleObject">{{text}}</div>
+    <div id="vm6" v-bind:style="[color,fontSize]">{{text}}</div>
+    <script>
+        // 绑定calss
+        var vm = new Vue({
+            el: '.static',
+            data: {
+                classObject: {
+                    actice: false,
+                    'text-danger': true
+                }
+            }
+        })
+
+        var vm1 = new Vue({
+            el: '#vm',
+            data: {
+                isActive: true,
+                error: null
+            },
+            computed: {
+                classObject: function () {
+                    return {
+                        active: this.isActive && !this.error,
+                        'text-danger': this.error && this.error.type === 'fatal'
+                    }
+                }
+            }
+        })
+
+        var vm2 = new Vue({
+            el: '#vm2',
+            data: {
+                activeClass: 'active',
+                errorClass: 'text-danger'
+            }
+        })
+
+        Vue.component('my-component',{
+            template: '<p class="foo bar">Hi</p>'
+        })
+        var vm3 = new Vue({
+            el: '#vm3',
+            data: {
+                isActive: true
+            }
+        })
+
+        // 绑定style
+        var vm4 = new Vue({
+            el: '#vm4',
+            data: {
+                activeColor: 'red',
+                fontSize: 30,
+                text: 'Hello Vue!'
+            }
+        })
+        var vm5 = new Vue({
+            el: '#vm5',
+            data: {
+                styleObject: {
+                    color: 'yellow',
+                    fontSize: '40px'
+                },
+                text: '你好!'
+            }
+        })
+        var vm6 = new Vue({
+            el: '#vm6',
+            data: {
+                color:  'color:blue',
+                fontSize: 'fontSize:30px',
+                text: '666'
+            }
+        })
+    </script>
+</body>
+
+</html>
