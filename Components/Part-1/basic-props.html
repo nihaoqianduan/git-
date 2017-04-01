@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>组件----基本组件实例</title>
+    <link rel="stylesheet" href="styles/demo.css">
+</head>
+<body>
+    <div id="app">
+        <my-component v-bind:my-name="name" v-bind:my-age="age"></my-component>
+    </div>
+
+    <template id="myComponent">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">
+                        子组件数据
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>my name</td>
+                    <td>{{ myName }}</td>
+                </tr>
+                <tr>
+                    <td>my age</td>
+                    <td>{{ myAge }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </template>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                name: 'keepfool',
+                age: 28
+            },
+            components: {
+                'my-component': {
+                    template: '#myComponent',
+                    props: ['myName', 'myAge']
+                }
+            }
+        })
+    </script>
+</body>
+</html>
